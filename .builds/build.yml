@@ -27,8 +27,8 @@ tasks:
       cd docker-soju
       sudo docker build -t "$CI_REGISTRY_IMAGE" .
   - verify: |
-      sudo docker run  -e USER='admin' -e PASSWORD='password' \
-      -e LISTEN_METHOD='irc+insecure' -e LISTEN_HOST='localhost' \
+      sudo timeout 20 docker run  -e USER='admin' -e PASSWORD='password' \
+      -e LISTEN_METHOD='' -e LISTEN_HOST='localhost' \
       -e LISTEN_PORT='6667' -p 6667:6667 "$CI_REGISTRY_IMAGE"
   - docker-push: |
       sudo docker push "$CI_REGISTRY_IMAGE"
