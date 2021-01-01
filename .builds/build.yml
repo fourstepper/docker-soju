@@ -22,7 +22,7 @@ tasks:
       sudo apt-get install docker-ce docker-ce-cli containerd.io
       sudo systemctl start docker
   - docker-login: |
-      docker login -u fourstepper --password-stdin=true < ~/.secrets/ci_registry_password
+      sudo docker login -u fourstepper --password-stdin=true < ~/.secrets/ci_registry_password
   - docker-build: |
       cd docker-soju
       sudo docker build -t "$CI_REGISTRY_IMAGE" .
