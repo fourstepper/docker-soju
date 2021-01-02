@@ -28,9 +28,8 @@ tasks:
       sudo docker run -d --name "test" -e USER='admin' -e PASSWORD='password' \
       -e LISTEN_METHOD='irc+insecure' -e LISTEN_HOST='localhost' \
       -e LISTEN_PORT='6667' -p 6667:6667 "$CI_REGISTRY_IMAGE"
-      sleep 10
       cd docker-soju
-      sudo ./ci-check.sh test
+      sudo ./ci-check.sh test 10
   - docker-push: |
       sudo docker login -u fourstepper --password-stdin=true < ~/.secrets/ci_registry_password
       sudo docker push "$CI_REGISTRY_IMAGE"
