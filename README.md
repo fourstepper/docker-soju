@@ -21,6 +21,7 @@ soju is an IRC bouncer - https://git.sr.ht/~emersion/soju
 ### Running the image
 
 **Run the image from the CLI**
+
 `docker run  -e USER='admin' -e PASSWORD='password' -e LISTEN_METHOD='irc+insecure' -e LISTEN_HOST='localhost' -e LISTEN_PORT='6667' -p 6667:6667 fourstepper/soju`
 
 
