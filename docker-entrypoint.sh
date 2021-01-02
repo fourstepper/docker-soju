@@ -52,6 +52,7 @@ else
     echo "listen $LISTEN_METHOD://$LISTEN_HOST:$LISTEN_PORT" >> $CONFIG
     echo "hostname $HOSTNAME" >> $CONFIG
     echo "sql sqlite3 /data/soju.db" >> $CONFIG
+    echo "New config generated"
 fi
 
 soju -config $CONFIG
