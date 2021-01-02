@@ -31,8 +31,10 @@ services:
     image: fourstepper/docker-soju:latest
     container_name: soju
     restart: unless-stopped
-    expose:
-      - "6667"
+    volumes:
+      - ./soju-data:/data
+    ports:
+      - "6667:6667"
     environment:
       - USER=admin
       - PASSWORD=password
