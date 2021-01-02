@@ -55,4 +55,4 @@ else
     echo "New config generated"
 fi
 
-soju -config $CONFIG
+cd /data && soju -config $CONFIG
