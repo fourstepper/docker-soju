@@ -47,7 +47,7 @@ if [ -e $CONFIG ]
 then
     echo "soju config exists, not regenerating"
 else
-    echo -n "$PASSWORD" | sojuctl -c $CONFIG create-user $USER -admin
+    echo -n "$PASSWORD" | sojuctl -config $CONFIG create-user $USER -admin
     touch $CONFIG
     echo "listen $LISTEN_METHOD://$LISTEN_HOST:$LISTEN_PORT" >> $CONFIG
     echo "hostname $HOSTNAME" >> $CONFIG
