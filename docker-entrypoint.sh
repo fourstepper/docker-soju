@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-CONFIG=/etc/soju.cfg
+CONFIG=/data/soju.cfg
 
 if [ -z "$USER" ] && [ ! -f $CONFIG ]
 then
@@ -26,7 +26,7 @@ fi
 
 if [ -z "$LISTEN_HOST" ] && [ ! -f $CONFIG ]
 then
-    echo "LISTEN_HOST variable undefined, falling back to '0.0.0.0' (recommended for Docker)"
+    echo "LISTEN_HOST variable undefined, falling back to '0.0.0.0' (recommended for Docker deployments)"
     LISTEN_HOST="0.0.0.0"
 fi
 
