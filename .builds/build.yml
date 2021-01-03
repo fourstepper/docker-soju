@@ -26,7 +26,7 @@ tasks:
       sudo docker build -t "$CI_REGISTRY_IMAGE" .
   - verify: |
       sudo docker run -d --name "test" -e USER='admin' -e PASSWORD='password' \
-      -e LISTEN_METHOD='irc+insecure' -e LISTEN_HOST='localhost' \
+      -e LISTEN_METHOD='irc+insecure' -e LISTEN_HOST='0.0.0.0' \
       -e LISTEN_PORT='6667' -p 6667:6667 "$CI_REGISTRY_IMAGE"
       cd docker-soju
       sudo ./ci-check.sh test 10
