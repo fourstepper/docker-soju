@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-CONFIG=/data/soju.cfg
+CONFIG="/data/soju.cfg"
 
 if [ -z "$USER" ] && [ ! -f $CONFIG ]
 then
