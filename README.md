@@ -42,10 +42,6 @@ services:
       - USER=admin
       - PASSWORD=password
       - LISTEN_METHOD=irc+insecure
-      - LISTEN_HOST=localhost
+      - LISTEN_HOST=0.0.0.0
       - LISTEN_PORT=6667
 ```
-
-### Explanation
-
-From the directives above, the entrypoint script will create a soju.cfg in the /data/ directory of the container, which is used as a point of reference and is set to be a persistent volume, alongside the database. Once that file is present, the directives above won't be enforced again and the soju.cfg file will be reused.

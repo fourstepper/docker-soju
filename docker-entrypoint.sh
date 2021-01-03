@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-CONFIG=/data/soju.cfg
+CONFIG=/etc/soju.cfg
 
 if [ -z "$USER" ] && [ ! -f $CONFIG ]
 then
@@ -17,13 +17,6 @@ then
     exit 1
 fi
 
-if [ -z "$HOSTNAME" ] && [ ! -f $CONFIG ]
-then
-    echo "Please make sure to define the HOSTNAME variable"
-    echo "For example: 'example.com'"
-    exit 1
-fi
-
 if [ -z "$LISTEN_METHOD" ] && [ ! -f $CONFIG ]
 then
     echo "Please make sure to define the LISTEN_METHOD variable"
@@ -31,10 +24,10 @@ then
     exit 1
 fi
 
-if [ -z "$LISTEN_METHOD" ] && [ ! -f $CONFIG ]
+if [ -z "$LISTEN_HOST" ] && [ ! -f $CONFIG ]
 then
-    echo "LISTEN_HOST variable undefined, falling back to 'localhost'"
-    LISTEN_HOST="localhost"
+    echo "LISTEN_HOST variable undefined, falling back to '0.0.0.0' (recommended for Docker)"
+    LISTEN_HOST="0.0.0.0"
 fi
 
 if [ -z "$LISTEN_PORT" ] && [ ! -f $CONFIG ]
@@ -50,7 +43,6 @@ else
     touch $CONFIG
     cd /data && echo -n "$PASSWORD" | sojuctl -config $CONFIG create-user $USER -admin
     echo "listen $LISTEN_METHOD://$LISTEN_HOST:$LISTEN_PORT" >> $CONFIG
-    echo "hostname $HOSTNAME" >> $CONFIG
     echo "sql sqlite3 /data/soju.db" >> $CONFIG
     echo "New config generated"
 fi
