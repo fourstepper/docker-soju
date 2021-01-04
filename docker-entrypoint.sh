@@ -45,13 +45,11 @@ else
     echo "listen $LISTEN_METHOD://$LISTEN_HOST:$LISTEN_PORT" >> $CONFIG
     echo "sql sqlite3 /data/soju.db" >> $CONFIG
     echo "New config generated"
-fi
-
-if [ -z $LOG_PATH ]
-then
-    echo "LOG_PATH environment varialbe not defined, no backlog will be available"
-else
-    echo "log $LOG_PATH" >> $CONFIG
+    if [ -z $LOG_PATH ]
+    then
+    else
+        echo "log $LOG_PATH" >> $CONFIG
+    fi
 fi
 
 cd /data && soju -config $CONFIG
