@@ -47,6 +47,7 @@ else
     echo "New config generated"
     if [ -z $LOG_PATH ]
     then
+        echo "LOG_PATH not specified, not adding to $CONFIG"
     else
         echo "log $LOG_PATH" >> $CONFIG
     fi
