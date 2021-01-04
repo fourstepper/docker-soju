@@ -42,4 +42,5 @@ services:
       - LISTEN_METHOD=irc+insecure
       - LISTEN_HOST=0.0.0.0
       - LISTEN_PORT=6667
+      - LOG_PATH=/data/irc.log
 ```

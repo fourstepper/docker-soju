@@ -47,4 +47,11 @@ else
     echo "New config generated"
 fi
 
+if [ -z $LOG_PATH ]
+then
+    echo "LOG_PATH environment varialbe not defined, no backlog will be available"
+else
+    echo "log $LOG_PATH" >> $CONFIG
+fi
+
 cd /data && soju -config $CONFIG
