@@ -31,5 +31,5 @@ tasks:
       cd docker-soju
       sudo ./ci-check.sh test 10
   - docker-push: |
-      sudo docker login -u fourstepper --password-stdin=true < ~/.secrets/ci_registry_password
+      sudo docker login -u "$CI_REGISTRY_USER" --password-stdin=true < ~/.secrets/ci_registry_password
       sudo docker push "$CI_REGISTRY_IMAGE"
