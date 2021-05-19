@@ -24,7 +24,10 @@ jobs:
         run: docker build -t container .
 
       - name: Run the built image.
-        run: docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro container
+        run: >
+          docker run -e USER='admin' -e PASSWORD='password'
+          -e LISTEN_METHOD='irc+insecure' -e LISTEN_HOST='0.0.0.0'
+          -e LISTEN_PORT='6667' --name test-container -d container
 
       - name: Verify that the container works
         run: docker exec --tty test-container env TERM=xterm cat /etc/os-release

@@ -43,7 +43,7 @@ else
     touch $CONFIG
     cd /data && echo -n "$PASSWORD" | sojuctl -config $CONFIG create-user $USER -admin
     echo "listen $LISTEN_METHOD://$LISTEN_HOST:$LISTEN_PORT" >> $CONFIG
-    echo "sql sqlite3 /data/soju.db" >> $CONFIG
+    echo "db sqlite3 /data/soju.db" >> $CONFIG
     echo "New config generated\n"
     if [ -z $LOG_PATH ]
     then
