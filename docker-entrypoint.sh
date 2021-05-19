@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
 
-CONFIG="/data/soju.cfg"
+BASE_PATH="/data"
+CONFIG="$BASE_PATH/soju.cfg"
 
 if [ -z "$USER" ] && [ ! -f $CONFIG ]
 then
@@ -36,10 +37,13 @@ then
     LISTEN_PORT="6667"
 fi
 
-# always recreate the config file
-rm -f $CONFIG && touch $CONFIG
-cd /data && echo -n "$PASSWORD" | sojuctl -config $CONFIG create-user $USER -admin
-echo "listen $LISTEN_METHOD://$LISTEN_HOST:$LISTEN_PORT" >> $CONFIG
+if [ -e "$BASE_PATH/soju.db" ]
+then
+    cd $BASE_PATH && echo -n "$PASSWORD" | sojuctl -config $CONFIG create-user $USER -admin
+fi
+
+touch $CONFIG
+echo "listen $LISTEN_METHOD://$LISTEN_HOST:$LISTEN_PORT" > $CONFIG
 echo "db sqlite3 /data/soju.db" >> $CONFIG
 echo "New config generated\n"
 if [ -z $LOG_PATH ]
@@ -49,4 +53,4 @@ else
     echo "log fs $LOG_PATH" >> $CONFIG
 fi
 
-cd /data && soju -config $CONFIG
+cd $BASE_PATH && soju -config $CONFIG
