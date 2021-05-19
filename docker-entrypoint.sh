@@ -49,7 +49,7 @@ else
     then
         echo "LOG_PATH not specified, not adding to $CONFIG\n"
     else
-        echo "log $LOG_PATH" >> $CONFIG
+        echo "log fs $LOG_PATH" >> $CONFIG
     fi
 fi
 
