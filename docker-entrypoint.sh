@@ -36,17 +36,21 @@ then
     LISTEN_PORT="6667"
 fi
 
-# always recreate the config file
-rm -f $CONFIG && touch $CONFIG
-cd /data && echo -n "$PASSWORD" | sojuctl -config $CONFIG create-user $USER -admin
-echo "listen $LISTEN_METHOD://$LISTEN_HOST:$LISTEN_PORT" >> $CONFIG
-echo "db sqlite3 /data/soju.db" >> $CONFIG
-echo "New config generated\n"
-if [ -z $LOG_PATH ]
+if [ -e $CONFIG ]
 then
-    echo "LOG_PATH not specified, not adding to $CONFIG\n"
+    echo "soju config exists, not regenerating"
 else
-    echo "log fs $LOG_PATH" >> $CONFIG
+    touch $CONFIG
+    cd /data && echo -n "$PASSWORD" | sojuctl -config $CONFIG create-user $USER -admin
+    echo "listen $LISTEN_METHOD://$LISTEN_HOST:$LISTEN_PORT" >> $CONFIG
+    echo "db sqlite3 /data/soju.db" >> $CONFIG
+    echo "New config generated\n"
+    if [ -z $LOG_PATH ]
+    then
+        echo "LOG_PATH not specified, not adding to $CONFIG\n"
+    else
+        echo "log fs $LOG_PATH" >> $CONFIG
+    fi
 fi
 
 cd /data && soju -config $CONFIG
