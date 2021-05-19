@@ -27,7 +27,8 @@ jobs:
         run: >
           docker run -e USER='admin' -e PASSWORD='password'
           -e LISTEN_METHOD='irc+insecure' -e LISTEN_HOST='0.0.0.0'
-          -e LISTEN_PORT='6667' --name test-container -d container
+          -e LISTEN_PORT='6667' -e LOG_PATH=/data/irc.log
+          --name test-container -d container
 
       - name: Verify that the container works
         run: docker exec --tty test-container env TERM=xterm cat /etc/os-release
